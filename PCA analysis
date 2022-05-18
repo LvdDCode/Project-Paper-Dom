@@ -1,0 +1,26 @@
+library(readxl)
+library(ggplot2)
+
+setwd("/Users/lvddr/OneDrive/Documents/Project Paper Dom/Project Paper Dom R Code")
+a<-read_xls("ALL_POS.xls")
+df<-as.data.frame(a)
+#jpeg(file="my_graph_3.jpg", res=600, width=4800, height=4800, pointsize=10)
+
+grouped <- data.frame(stringsAsFactors=False,
+                      col1=c(rep()))
+
+ggplot(df, aes(x=df$`PC 1 (40.2%)`, y=df$`PC 2 (16.9%)`, color=Sample)) + 
+  geom_point(aes(shape = Sample, color = Sample)) +
+  scale_shape_manual(values = c(15, 15, 15, 15, 16, 16, 16, 16, 17, 17, 17, 17, 18)) +
+  scale_color_manual(values=c("#43c4ef", "#009eff", "#0066ff", "#004fff", "#ffba87", "#ff8a35", "#ff6a00", 
+                              "#d85b00", "#8d8d8d", "#767575", "#636363", "#424242", "black")) +
+  theme_classic() +
+  geom_hline(yintercept = 0, linetype="dashed") +
+  geom_vline(xintercept = 0, linetype="dashed") +
+  theme(axis.text.x = element_text(size=16), 
+        axis.text.y = element_text(size = 16), 
+        axis.title = element_text(size = 16), 
+        legend.text = element_text(size = 14), 
+        legend.title = element_text(size = 16))        
+
+dev.off()
