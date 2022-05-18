@@ -1,0 +1,33 @@
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sb
+import numpy as np
+ 
+# import file with data
+data = pd.read_csv(r"C:\Users\lvddr\OneDrive\Documents\Project Paper Dom\PEARSON CORRELATION ANALYSIS\2004 MCF7.csv")
+
+# applying mask
+mask = np.triu(np.ones_like(data.corr()))
+
+plt.figure(figsize=(16,16))
+
+# Set scale
+sb.set(font_scale=1.2)
+
+# Set background to white
+sb.set_style(style='white') 
+
+#Custom palette
+cmap = sb.diverging_palette(10, 255, as_cmap=True)
+#hex = "#636363", "#155ff0"
+# plotting a triangle correlation heatmap
+dataplot = sb.heatmap(data.corr(), xticklabels=True, yticklabels=True, 
+mask=mask, vmax=1.00, vmin=-1.00, square=True, cmap=cmap, cbar_kws={'shrink':0.8, 'label':'Pearson Correlation Coefficient'})
+
+
+
+plt.show()
+
+
+ 
+
